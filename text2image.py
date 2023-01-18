@@ -28,7 +28,8 @@ def get_text_content(text_file):
 def main(text_file, dst_file, font_name='SimHei', font_size=22):
     text = get_text_content(text_file)
     #im = MakeGradationImg(600, 600, RGB(10,10,10), RGB(50, 12, 38), (False, False, False)) # for Thorough answer
-    im = MakeGradationImg(600, 600, RGB(230,230,230), RGB(0, 230, 0), (False, False, False))
+    #im = MakeGradationImg(600, 600, RGB(230,230,230), RGB(0, 230, 0), (False, False, False)) # for That's true
+    im = MakeGradationImg(600, 600, RGB(240,240,240), RGB(0, 0, 250), (False, False, False)) # 
     draw = ImageDraw.Draw(im) #Draw the image
     try:
         monoFont = ImageFont.truetype(os.path.join(fontsFolder, '%s.ttf' % font_name), font_size)
@@ -39,8 +40,12 @@ def main(text_file, dst_file, font_name='SimHei', font_size=22):
     return im
 
 if __name__ == '__main__':
+    if len(sys.argv) < 4:
+        print("Usage: %s [text_path][dst_path][font_name][font_size]" % (sys.argv[0]))
+        sys.exit(0)
     text_file = sys.argv[1]
     dst_file = sys.argv[2]
     font_name = sys.argv[3]
-    main(text_file, dst_file, font_name)
+    font_size = int(sys.argv[4])
+    main(text_file, dst_file, font_name, font_size)
 
